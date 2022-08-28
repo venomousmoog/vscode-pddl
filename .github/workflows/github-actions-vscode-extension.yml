@@ -43,24 +43,24 @@ jobs:
           npm install -g vsce
           vsce package
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    if: success() && github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.18
+  # publish:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: success() && github.ref == 'refs/heads/master'
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 14.18
 
-      - name: NPM Install
-        run: npm install
+  #     - name: NPM Install
+  #       run: npm install
 
-      - name: Publish extension to marketplace
-        run: | 
-          npm install -g vsce
-          vsce publish -p $VSCE_TOKEN
-        env: 
-          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-        continue-on-error: true
+  #     - name: Publish extension to marketplace
+  #       run: | 
+  #         npm install -g vsce
+  #         vsce publish -p $VSCE_TOKEN
+  #       env: 
+  #         VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+  #       continue-on-error: true
